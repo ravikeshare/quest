@@ -5,7 +5,6 @@ from rest_framework import status
 from quest.tenant.models import Tenant
 import time
 
-import datetime
 
 class QuestionAPITest(APITestCase):
 
@@ -22,7 +21,6 @@ class QuestionAPITest(APITestCase):
         response = self.client.post("http://localhost:8200/api/v1/qa/"+tenant_api_key+"/", data={
             'title': 'My new question',
         })
-        print("response.status_code ", response.status_code)
         self.assertEqual(
             response.status_code,
             status.HTTP_405_METHOD_NOT_ALLOWED,
@@ -30,7 +28,6 @@ class QuestionAPITest(APITestCase):
 
     def test_get_wrong_api_key(self):
         response = self.client.get("http://localhost:8200/api/v1/qa/111111/")
-        print(" test_get_wrong_api_key: status_code ", response.status_code)
         self.assertEqual(
             response.status_code,
             status.HTTP_403_FORBIDDEN,

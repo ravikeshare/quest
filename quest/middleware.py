@@ -9,7 +9,6 @@ class TenantMiddleware(MiddlewareMixin):
     def process_view(self, request, view_func, view_args, view_kwargs):
         key = view_kwargs.get('key', None)
         if '/qa/' in request.path:
-            print("key ", key)
             if key:
                 try:
                     tenant = Tenant.objects.get(api_key=key)
